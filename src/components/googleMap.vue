@@ -48,14 +48,12 @@
         mounted() {
             this.geolocate();
         },
-        created() {
-            this.addMarker()
-        },
 
         methods: {
             // receives a place object via the autocomplete component
             setPlace(place) {
-                this.currentPlace = place;
+                this.currentPlace = place
+                console.log('this.currentplace', this.currentPlace)
             },
             addMarker() {
                 if (this.currentPlace) {

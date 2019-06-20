@@ -1,0 +1,14 @@
+.mainDiv {
+    margin-top: 50px;
+}
+.btn-row {
+    margin-top: 20px;
+}
+/*.btn-custom {*/
+    /*width: 100%;*/
+/*}*/
+.btn-info, .btn-secondary {
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
