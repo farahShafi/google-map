@@ -4,7 +4,7 @@
             <b-card-group deck>
                 <b-card header="Add New Property">
                     <div>
-                        <b-form @submit="onSubmit" @reset="onReset">
+                        <b-form @submit="onSubmit">
                             <b-form-group id="address-group-1"
                                     label="Property address:"
                                     label-for="address"
@@ -13,13 +13,6 @@
                                 <gmap-autocomplete style="width: 100%"
                                                    @place_changed="setPlace">
                                 </gmap-autocomplete>
-                                <!--<button @click="addMarker">Add</button>-->
-                                <!--<b-form-input-->
-                                        <!--id="address"-->
-                                        <!--v-model="form.address"-->
-                                        <!--required-->
-                                        <!--placeholder="Enter address"-->
-                                <!--&gt;</b-form-input>-->
                             </b-form-group>
 
                             <b-form-group id="input-group-2"
@@ -52,12 +45,9 @@
                                     max-rows="6"
                             ></b-form-textarea>
 
-                            <div class="col-lg-8 offset-lg-2 row btn-row">
-                                <div class="col-xs-12 col-lg-6 btn-custom">
+                            <div class="col-lg-6 offset-lg-3 row btn-row">
+                                <div class="btn-custom">
                                     <b-button type="submit" variant="info">Submit</b-button>
-                                </div>
-                                <div class="col-sx-12 col-lg-6 btn-custom">
-                                    <b-button type="reset" variant="secondary">Reset</b-button>
                                 </div>
                             </div>
                         </b-form>
@@ -71,7 +61,9 @@
                             style="width:100%;  height: 500px;"
                     >
                         <gmap-info-window v-if='this.currentPlace' :options="infoOptions" :position="infoPosition" :opened="infoOpened" >
-                            {{this.currentPlace.formatted_address}}
+                            <div class="popoverStyle">
+                                Address: {{this.currentPlace.formatted_address}}
+                            </div>
                         </gmap-info-window>
                         <gmap-marker
                                 v-for="(m, key) in markers"
@@ -123,19 +115,6 @@
             onSubmit(evt) {
                 evt.preventDefault()
                 alert(JSON.stringify(this.form))
-            },
-            onReset(evt) {
-                evt.preventDefault()
-                // Reset our form values
-                this.form.address = ''
-                this.form.full_name = ''
-                this.form.price = ''
-                this.form.description = ''
-                // Trick to reset/clear native browser form validation state
-                this.show = false
-                this.$nextTick(() => {
-                    this.show = true
-                })
             },
             // receives a place object via the autocomplete component
             setPlace(place) {

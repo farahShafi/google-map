@@ -4,11 +4,16 @@
 .btn-row {
     margin-top: 20px;
 }
-/*.btn-custom {*/
-    /*width: 100%;*/
-/*}*/
-.btn-info, .btn-secondary {
+.btn-custom {
+    width: 100%;
+}
+.btn-info {
     width: 100%;
     margin-top: 15px;
     margin-bottom: 15px;
+}
+.popoverStyle {
+    font-size: 16px;
+    color: seagreen;
+    font-weight: 700;
 }
