@@ -12,7 +12,7 @@
                         <!-- Using 'button-content' slot -->
                         <template slot="button-content"><em>User</em></template>
                         <b-dropdown-item :to="{ name: 'New'}">Add Property</b-dropdown-item>
-                        <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+                        <b-dropdown-item :to="{ name: 'Map'}">Sign Out</b-dropdown-item>
                     </b-nav-item-dropdown>
                     <b-nav-item v-else href="#">Sign In</b-nav-item>
                 </b-navbar-nav>

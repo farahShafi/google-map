@@ -4,7 +4,7 @@
             <b-card-group deck>
                 <b-card header="Add New Property">
                     <div>
-                        <b-form @submit="onSubmit">
+                        <b-form>
                             <b-form-group id="address-group-1"
                                     label="Property address:"
                                     label-for="address"
@@ -47,7 +47,7 @@
 
                             <div class="col-lg-6 offset-lg-3 row btn-row">
                                 <div class="btn-custom">
-                                    <b-button type="submit" variant="info">Submit</b-button>
+                                    <b-button @click="onSubmit" variant="info">Submit</b-button>
                                 </div>
                             </div>
                         </b-form>
@@ -112,9 +112,35 @@
             this.geolocate();
         },
         methods: {
-            onSubmit(evt) {
-                evt.preventDefault()
-                alert(JSON.stringify(this.form))
+            onSubmit() {
+                console.log('this.form', this.form)
+                if(this.form.address.formatted_address){
+                    const propertyNew = {
+                        formatted_address: this.form.address.formatted_address,
+                        full_name: this.form.full_name,
+                        price: this.form.price,
+                        description: this.form.description,
+                        lat: this.form.address.geometry.location.lat(),
+                        lng: this.form.address.geometry.location.lng()
+                    }
+                    console.log('new prop', propertyNew)
+                    console.log('storage in map', this.storage.properties)
+                    var data = []
+                    data = this.storage.properties
+                    console.log('oldData', data)
+                    data.push(propertyNew)
+                    localStorage.setItem('properties', data);
+                    this.$router.push({
+                        name: 'Map',
+                    });
+                } else {
+                    alert ('Please complete the Form to submit')
+                }
+
+                // }
+                console.log('local storage config', localStorage)
+
+
             },
             // receives a place object via the autocomplete component
             setPlace(place) {
@@ -134,6 +160,7 @@
                     this.places.push(this.currentPlace);
                     this.center = marker;
                     // this.currentPlace = null;
+                    this.form.address = this.currentPlace
 
                 }
             },

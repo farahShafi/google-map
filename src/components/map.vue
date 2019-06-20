@@ -12,7 +12,7 @@
             </gmap-info-window>
 
             <gmap-marker
-                    v-for="(item, key) in properties"
+                    v-for="(item, key) in this.storage.properties"
                     :key="key"
                     :position="getPosition(item)"
                     :clickable="true"
@@ -32,26 +32,6 @@
                 startLocation: {
                     lat: 40.5649781, lng: -111.8389726
                 },
-                properties: {
-                    0: {
-                        formatted_address: '412 West 9000 South, Sandy, UT 84070\n' +
-                        'Sandy Sandy Utah United States',
-                        full_name: 'Timcoat Tim',
-                        price: '350k',
-                        description: 'Single Home, Built in 1998',
-                        lat: '40.5886089',
-                        lng: '-111.9034992'
-                    },
-                    1: {
-                        formatted_address: 'South Salt Lake, UT 84115\n' +
-                        'South Salt Lake South Salt Lake, Salt Lake City Utah United States',
-                        full_name: 'Chris Hornok',
-                        price: '470k',
-                        description: 'twin home, Built in 2010',
-                        lat: '40.6973223',
-                        lng: '-111.8784961'
-                    }
-                },
                 infoPosition: null,
                 infoContent: {
                     formatted_address: '',
@@ -70,6 +50,9 @@
                     }
                 }
             }
+        },
+        created(){
+            console.log('storage in map', this.storage.properties)
         },
         methods: {
             getPosition: function(marker) {
