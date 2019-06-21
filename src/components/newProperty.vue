@@ -83,7 +83,14 @@
 </template>
 
 <script>
+    import { mapActions } from 'vuex'
+    import { mapGetters } from 'vuex'
+
+    const namespaced = true
+
     export default {
+        namespaced,
+        name: 'new',
         data() {
             return {
                 form: {
@@ -111,7 +118,14 @@
         mounted() {
             this.geolocate();
         },
+        created(){
+            console.log('all in new created', this.allProperties)
+        },
+        computed: {
+            ...mapGetters('allProperties',['allProperties']),
+        },
         methods: {
+            ...mapActions('properties',['addProperty']),
             onSubmit() {
                 console.log('this.form', this.form)
                 if(this.form.address.formatted_address){
@@ -123,24 +137,19 @@
                         lat: this.form.address.geometry.location.lat(),
                         lng: this.form.address.geometry.location.lng()
                     }
-                    console.log('new prop', propertyNew)
-                    console.log('storage in map', this.storage.properties)
+                    // console.log('new prop', propertyNew)
+                    console.log('storage in map', this.allProperties)
                     var data = []
-                    data = this.storage.properties
+                    data = this.allProperties
                     console.log('oldData', data)
                     data.push(propertyNew)
-                    localStorage.setItem('properties', data);
+                    this.addProperty(data)
                     this.$router.push({
                         name: 'Map',
                     });
                 } else {
                     alert ('Please complete the Form to submit')
                 }
-
-                // }
-                console.log('local storage config', localStorage)
-
-
             },
             // receives a place object via the autocomplete component
             setPlace(place) {

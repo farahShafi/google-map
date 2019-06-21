@@ -12,7 +12,7 @@
             </gmap-info-window>
 
             <gmap-marker
-                    v-for="(item, key) in this.storage.properties"
+                    v-for="(item, key) in allProperties"
                     :key="key"
                     :position="getPosition(item)"
                     :clickable="true"
@@ -25,6 +25,7 @@
 </template>
 
 <script>
+    import { mapGetters } from 'vuex'
     export default {
         name: 'Gmap',
         data() {
@@ -51,8 +52,11 @@
                 }
             }
         },
+        computed: {
+            ...mapGetters('allProperties',['allProperties'])
+        },
         created(){
-            console.log('storage in map', this.storage.properties)
+            console.log('all', this.allProperties)
         },
         methods: {
             getPosition: function(marker) {
