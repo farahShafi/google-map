@@ -1,6 +1,6 @@
 <template>
     <div id="root">
-        <gmap-map ref="mymap" :center="startLocation" :zoom="11" style="width: 100%; height: 100vh">
+        <gmap-map ref="mymap" :center="startLocation" :zoom="11" style="width: 100%;">
 
             <gmap-info-window :options="infoOptions" :position="infoPosition" :opened="infoOpened" >
                 <div class="popoverStyle">

@@ -13,12 +13,9 @@ const actions = {
         return info.state.loggenIn
     },
     setloggedIn( {commit}, loggedIn){
-        console.log('trying to add in action')
         commit('SET_LOGGED_IN', loggedIn)
     }
 }
-
-
 
 export default {
     namespaced: true,
